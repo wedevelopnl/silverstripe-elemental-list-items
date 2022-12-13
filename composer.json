@@ -1,0 +1,48 @@
+{
+    "name": "wedevelopnl/silverstripe-elemental-list-items",
+    "description": "List items module",
+    "keywords": [
+        "silverstripe",
+        "list items",
+        "usp",
+        "usps"
+    ],
+    "authors": [{
+        "name": "WeDevelop",
+        "email": "development@wedevelop.nl"
+    }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "silverstripe/cms": "^4@stable",
+        "silverstripe/vendor-plugin": "^1.0",
+        "silverstripe/lumberjack": "^2.0",
+        "unclecheese/display-logic": "^2.0",
+        "symbiote/silverstripe-gridfieldextensions": "^3.5"
+    },
+    "require-dev": {
+      "friendsofphp/php-cs-fixer": "^3.4"
+    },
+    "extra": {
+        "installer-name": "silverstripe-elemental-list-items",
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "suggest": {
+        "thewebmen/silverstripe-elemental-grid": "Our base elemental grid with customizable column widths to make the grid element work"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeDevelop\\ElementalListItems\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": false,
+            "silverstripe/vendor-plugin": false,
+            "silverstripe/recipe-plugin": false
+        }
+    }
+}

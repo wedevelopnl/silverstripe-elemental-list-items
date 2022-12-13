@@ -1,0 +1,15 @@
+nl:
+  WeDevelop\ElementalListItems\Models\Collection:
+    SINGULARNAME: 'Collectie'
+    PLURALNAME: 'Collecties'
+    PLURALS:
+      one: 'Een collectie'
+      other: '{count} collecties'
+  WeDevelop\ElementalListItems\Models\ListItem:
+    SINGULARNAME: 'Lijst item'
+    PLURALNAME: 'Lijst items'
+    PLURALS:
+      one: 'Een lijst item'
+      other: '{count} lijst items'
+  WeDevelop\ElementalListItems\ElementalGrid\ElementPortfolio:
+    NOITEMSFOUND: 'Geen items gevonden'
