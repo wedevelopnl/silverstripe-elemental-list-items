@@ -19,7 +19,7 @@ use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
 class ListItem extends DataObject
 {
     /** @config */
-    private static string $table_name = 'WeDevelop_ElementalListItems_Collection';
+    private static string $table_name = 'WeDevelop_ElementalListItems_ListItem';
 
     /** @config */
     private static string $singular_name = 'Collection';
