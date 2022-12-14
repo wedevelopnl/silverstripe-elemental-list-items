@@ -1,11 +1,8 @@
 <% if $ShowTitle %>
     <$TitleTag class="$TitleSizeClass">$Title.RAW</$TitleTag>
 <% end_if %>
-<hr />
-$Items.Count <%t WeDevelop\ListItems\ElementalGrid\CasePage.PLURALNAME "List items" %>
-<hr /><br />
 <% if $Items %>
-    <ul>
+    <ul class="list">
         <% loop $Items %>
             <li>
                 <% if $Icon && $Icon != '' %>
@@ -13,8 +10,10 @@ $Items.Count <%t WeDevelop\ListItems\ElementalGrid\CasePage.PLURALNAME "List ite
                         $Icon
                     </div>
                 <% end_if %>
-                $Title
-                $Content
+                <h2>$Title</h2>
+                <div class="content">
+                    $Content
+                </div>
             </li>
         <% end_loop %>
     </ul>

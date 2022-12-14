@@ -39,9 +39,9 @@ class ElementListItems extends BaseElement
     /** @config */
     private static string $icon = 'font-icon-list';
 
-    private const MODE_CUSTOM = 'custom';
+    public const MODE_CUSTOM = 'custom';
 
-    private const MODE_COLLECTION = 'collection';
+    public const MODE_COLLECTION = 'collection';
 
     /** @config */
     private static array $db = [

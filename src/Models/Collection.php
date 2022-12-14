@@ -80,15 +80,20 @@ class Collection extends DataObject
         if ($this->exists()) {
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
-                GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(), $listItemsGridConfig),
+                GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(),
+                    $listItemsGridConfig),
             ]);
 
             $fields->addFieldsToTab('Root.Grid elements used in', [
-                GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'), $this->ElementListItems(), $elementalGridConfig),
+                GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'),
+                    $this->ElementListItems()->filter([
+                        'Mode' => ElementListItems::MODE_COLLECTION
+                    ]), $elementalGridConfig),
             ]);
         } else {
             $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', _t(__CLASS__ . '.SAVE_FIRST_WARNING', 'Save the collection first, in order to be able to make changes to the contents of this collection.')),
+                new LiteralField('', _t(__CLASS__ . '.SAVE_FIRST_WARNING',
+                    'Save the collection first, in order to be able to make changes to the contents of this collection.')),
             ]);
         }
 
