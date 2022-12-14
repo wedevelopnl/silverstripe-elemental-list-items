@@ -7,6 +7,8 @@ namespace WeDevelop\ElementalListItems\Models;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
@@ -27,12 +29,12 @@ class ListItem extends DataObject
     private static string $plural_name = 'List items';
 
     /** @config */
-    private static string $icon_class = 'font-icon-rocket';
+    private static string $icon_class = 'font-icon-check-mark-2';
 
     /** @config */
     private static array $db = [
         'Title' => 'Varchar(255)',
-        'Content' => 'Varchar(255)',
+        'Content' => 'HTMLText',
     ];
 
     /** @config */
@@ -55,6 +57,11 @@ class ListItem extends DataObject
             'ElementListItems',
             'Title',
             'Content',
+        ]);
+
+        $fields->addFieldsToTab('Root.Main', [
+            TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
+            HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
         ]);
 
         $fields->addFieldsToTab('Root.Collections existing in', [

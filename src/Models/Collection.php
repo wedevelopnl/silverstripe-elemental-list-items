@@ -9,6 +9,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\ManyManyList;
@@ -75,8 +76,10 @@ class Collection extends DataObject
             'ElementListItems',
         ]);
 
+
         if ($this->exists()) {
             $fields->addFieldsToTab('Root.Main', [
+                TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
                 GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(), $listItemsGridConfig),
             ]);
 

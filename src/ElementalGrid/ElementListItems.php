@@ -9,7 +9,6 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
@@ -88,7 +87,6 @@ class ElementListItems extends BaseElement
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
-                    HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
                     DropdownField::create('Mode', _t(__CLASS__ . '.SELECTION_MODE', 'List items selection mode'), [
                         self::MODE_COLLECTION => 'Choose from collection',
                         self::MODE_CUSTOM => 'Choose custom',
