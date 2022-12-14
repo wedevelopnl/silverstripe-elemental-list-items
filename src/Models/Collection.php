@@ -40,22 +40,34 @@ class Collection extends DataObject
     /** @config */
     private static string $icon_class = 'font-icon-rocket';
 
-    /** @config */
+    /**
+     * @var array<string>
+     * @config
+     */
     private static array $summary_fields = [
         'Title',
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $has_many = [
         'ElementListItems' => ElementListItems::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $many_many = [
         'ListItems' => ListItem::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string, array<string, string>>
+     * @config
+     */
     private static array $many_many_extraFields = [
         'ListItems' => [
             'ListItemsSort' => 'Int',
@@ -76,7 +88,6 @@ class Collection extends DataObject
             'ElementListItems',
         ]);
 
-
         if ($this->exists()) {
             $fields->addFieldsToTab('Root.Main', [
                 TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
@@ -87,7 +98,7 @@ class Collection extends DataObject
             $fields->addFieldsToTab('Root.Grid elements used in', [
                 GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'),
                     $this->ElementListItems()->filter([
-                        'Mode' => ElementListItems::MODE_COLLECTION
+                        'Mode' => 'Collection'
                     ]), $elementalGridConfig),
             ]);
         } else {

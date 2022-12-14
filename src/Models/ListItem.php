@@ -33,28 +33,43 @@ class ListItem extends DataObject
     /** @config */
     private static string $icon_class = 'font-icon-check-mark-2';
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $db = [
         'Title' => 'Varchar(255)',
         'Content' => 'HTMLText',
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $has_one = [
         'Icon' => Icon::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string>
+     * @config
+     */
     private static array $owns = [
         'Icon',
     ];
 
-    /** @config */
+    /**
+     * @var array<string>
+     * @config
+     */
     private static array $summary_fields = [
         'Title',
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $belongs_many_many = [
         'Collections' => Collection::class,
         'ElementListItems' => ElementListItems::class,

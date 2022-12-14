@@ -1,6 +1,8 @@
 <% if $ShowTitle %>
     <$TitleTag class="$TitleSizeClass">$Title.RAW</$TitleTag>
 <% end_if %>
+Selection mode: $Mode<br />
+Total item count: $Items.Count <%t WeDevelop\ListItems\ElementalGrid\CasePage.PLURALNAME "List items" %>
 <% if $Items %>
     <ul class="list">
         <% loop $Items %>
