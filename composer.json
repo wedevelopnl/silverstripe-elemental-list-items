@@ -40,9 +40,7 @@
     },
     "config": {
         "allow-plugins": {
-            "composer/installers": false,
-            "silverstripe/recipe-plugin": false,
-            "silverstripe/vendor-plugin": true
+            "composer/installers": false
         }
     }
 }
