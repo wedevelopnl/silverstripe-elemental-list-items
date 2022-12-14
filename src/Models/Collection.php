@@ -24,11 +24,6 @@ use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
 class Collection extends DataObject
 {
     /** @config */
-    private static array $db = [
-        'Title' => 'Varchar(255)',
-    ];
-
-    /** @config */
     private static string $table_name = 'WeDevelop_ElementalListItems_Collection';
 
     /** @config */
@@ -39,6 +34,14 @@ class Collection extends DataObject
 
     /** @config */
     private static string $icon_class = 'font-icon-rocket';
+
+    /**
+     * @var array<string, string>
+     * @config
+     */
+    private static array $db = [
+        'Title' => 'Varchar(255)',
+    ];
 
     /**
      * @var array<string>
