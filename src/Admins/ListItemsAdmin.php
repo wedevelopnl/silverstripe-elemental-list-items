@@ -19,7 +19,10 @@ class ListItemsAdmin extends ModelAdmin
     /** @config */
     private static string $menu_icon_class = 'font-icon-list';
 
-    /** @config */
+    /**
+     * @var array<string>
+     * @config
+     */
     private static array $managed_models = [
         Collection::class,
         ListItem::class,
