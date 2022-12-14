@@ -8,9 +8,11 @@ $Items.Count <%t WeDevelop\ListItems\ElementalGrid\CasePage.PLURALNAME "List ite
     <ul>
         <% loop $Items %>
             <li>
-                <div class="svg-icon">
-                    $Icon
-                </div>
+                <% if $Icon && $Icon != '' %>
+                    <div class="svg-icon">
+                        $Icon
+                    </div>
+                <% end_if %>
                 $Title
                 $Content
             </li>

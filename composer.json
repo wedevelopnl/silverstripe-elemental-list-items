@@ -19,7 +19,8 @@
         "silverstripe/vendor-plugin": "^1.0",
         "silverstripe/lumberjack": "^2.0",
         "unclecheese/display-logic": "^2.0",
-        "symbiote/silverstripe-gridfieldextensions": "^3.5"
+        "symbiote/silverstripe-gridfieldextensions": "^3.5",
+        "wedevelopnl/silverstripe-icon-manager": "^2.0"
     },
     "require-dev": {
       "friendsofphp/php-cs-fixer": "^3.4"

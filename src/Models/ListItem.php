@@ -12,6 +12,8 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
+use WeDevelop\IconManager\Forms\IconDropdownField;
+use WeDevelop\IconManager\Models\Icon;
 
 /**
  * @method ElementListItems|ManyManyList ElementListItems()
@@ -38,6 +40,16 @@ class ListItem extends DataObject
     ];
 
     /** @config */
+    private static array $has_one = [
+        'Icon' => Icon::class,
+    ];
+
+    /** @config */
+    private static array $owns = [
+        'Icon' => Icon::class,
+    ];
+
+    /** @config */
     private static array $summary_fields = [
         'Title',
     ];
@@ -57,9 +69,11 @@ class ListItem extends DataObject
             'ElementListItems',
             'Title',
             'Content',
+            'IconID',
         ]);
 
         $fields->addFieldsToTab('Root.Main', [
+            IconDropdownField::create('IconID', 'Icon'),
             TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
             HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
         ]);
