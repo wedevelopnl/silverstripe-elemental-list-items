@@ -53,8 +53,6 @@ class ListItem extends DataObject
         $fields->removeByName([
             'Collections',
             'ElementListItems',
-            'Title',
-            'Content',
         ]);
 
         $fields->addFieldsToTab('Root.Collections existing in', [
