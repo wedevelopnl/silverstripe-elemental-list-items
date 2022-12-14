@@ -1,4 +1,9 @@
 nl:
+  WeDevelop\ElementalListItems\ElementalGrid\ElementListItems:
+    CONTENT: 'Inhoud'
+    SELECTION_MODE: 'Lijst items selectie methode'
+    COLLECTION_SELECTION: 'Selecteer collectie'
+    LIST_ITEMS_SELECTION: 'Selecteer lijst items'
   WeDevelop\ElementalListItems\Models\Collection:
     SINGULARNAME: 'Collectie'
     PLURALNAME: 'Collecties'

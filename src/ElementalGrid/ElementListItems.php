@@ -87,14 +87,14 @@ class ElementListItems extends BaseElement
                 [
                     HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
                     DropdownField::create('Mode', _t(__CLASS__ . '.SELECTION_MODE', 'List items selection mode'), [
-                        'Collection' => 'Choose from collection',
-                        'Custom' => 'Choose custom',
+                        'Collection' => _t(__CLASS__ . 'COLLECTION_SELECTION', 'Choose from collection'),
+                        'Custom' => _t(__CLASS__ . 'LIST_ITEMS_SELECTION', 'Pick list items'),
                     ]),
                     Wrapper::create([
-                        DropdownField::create('CollectionID', _t(__CLASS__ . '.COLLECTION', 'Collection'), Collection::get()->map()->toArray()),
+                        DropdownField::create('CollectionID', _t(Collection::class . '.SINGULARNAME', 'Collection'), Collection::get()->map()->toArray()),
                     ])->displayIf('Mode')->isEqualTo('Collection')->end(),
                     Wrapper::create([
-                        GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(), $gridConfig)->addExtraClass('mt-5'),
+                        GridField::create('ListItems', _t(ListItem::class . '.PLURALNAME', 'List items'), $this->ListItems(), $gridConfig)->addExtraClass('mt-5'),
                     ])->displayIf('Mode')->isEqualTo('Custom')->end(),
                 ]
             );

@@ -1,4 +1,9 @@
 en:
+  WeDevelop\ElementalListItems\ElementalGrid\ElementListItems:
+    CONTENT: 'Content'
+    SELECTION_MODE: 'List items selection mode'
+    COLLECTION_SELECTION: 'Choose from collection'
+    LIST_ITEMS_SELECTION: 'Pick list items'
   WeDevelop\ElementalListItems\Models\Collection:
     SINGULARNAME: 'Collection'
     PLURALNAME: 'Collections'
