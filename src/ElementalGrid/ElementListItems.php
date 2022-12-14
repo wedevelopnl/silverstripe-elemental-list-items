@@ -40,29 +40,44 @@ class ElementListItems extends BaseElement
     /** @config */
     private static string $icon = 'font-icon-list';
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $db = [
         'Mode' => 'Enum(["Custom", "Collection"])',
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $has_one = [
         'Collection' => Collection::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $many_many = [
         'ListItems' => ListItem::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string, array<string, string>>
+     * @config
+     */
     private static array $many_many_extraFields = [
         'ListItems' => [
             'ListItemsSort' => 'Int',
         ],
     ];
 
-    /** @config */
+    /**
+     * @var array<string, mixed>
+     * @config
+     */
     private static array $defaults = [
         'MaxAmount' => 10,
         'Mode' => 'Collection',

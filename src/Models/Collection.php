@@ -23,11 +23,6 @@ use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
 class Collection extends DataObject
 {
     /** @config */
-    private static array $db = [
-        'Title' => 'Varchar(255)',
-    ];
-
-    /** @config */
     private static string $table_name = 'WeDevelop_ElementalListItems_Collection';
 
     /** @config */
@@ -39,22 +34,42 @@ class Collection extends DataObject
     /** @config */
     private static string $icon_class = 'font-icon-rocket';
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
+    private static array $db = [
+        'Title' => 'Varchar(255)',
+    ];
+
+    /**
+     * @var array<string>
+     * @config
+     */
     private static array $summary_fields = [
         'Title',
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $has_many = [
         'ElementListItems' => ElementListItems::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string, string>
+     * @config
+     */
     private static array $many_many = [
         'ListItems' => ListItem::class,
     ];
 
-    /** @config */
+    /**
+     * @var array<string, array<string, string>>
+     * @config
+     */
     private static array $many_many_extraFields = [
         'ListItems' => [
             'ListItemsSort' => 'Int',
