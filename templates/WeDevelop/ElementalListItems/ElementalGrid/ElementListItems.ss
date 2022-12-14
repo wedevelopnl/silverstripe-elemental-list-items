@@ -2,7 +2,8 @@
     <$TitleTag class="$TitleSizeClass">$Title.RAW</$TitleTag>
 <% end_if %>
 <hr />
-$Items.Count <%t WeDevelop\ListItems\ElementalGrid\CasePage.PLURALNAME "List items" %>
+Selection mode: $Mode<br />
+Total item count: $Items.Count <%t WeDevelop\ListItems\ElementalGrid\CasePage.PLURALNAME "List items" %>
 <hr /><br />
 <% if $Items %>
     <ul>
