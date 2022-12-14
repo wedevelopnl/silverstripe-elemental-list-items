@@ -7,7 +7,6 @@ namespace WeDevelop\ElementalListItems\Models;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
