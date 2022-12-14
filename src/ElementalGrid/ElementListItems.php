@@ -40,13 +40,9 @@ class ElementListItems extends BaseElement
     /** @config */
     private static string $icon = 'font-icon-list';
 
-    private const MODE_CUSTOM = 'custom';
-
-    private const MODE_COLLECTION = 'collection';
-
     /** @config */
     private static array $db = [
-        'Mode' => 'Varchar(255)',
+        'Mode' => 'Enum(["Custom", "Collection"])',
     ];
 
     /** @config */
@@ -69,6 +65,7 @@ class ElementListItems extends BaseElement
     /** @config */
     private static array $defaults = [
         'MaxAmount' => 10,
+        'Mode' => 'Collection',
     ];
 
     public function getCMSFields(): FieldList
@@ -90,15 +87,15 @@ class ElementListItems extends BaseElement
                 [
                     HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
                     DropdownField::create('Mode', _t(__CLASS__ . '.SELECTION_MODE', 'List items selection mode'), [
-                        self::MODE_COLLECTION => 'Choose from collection',
-                        self::MODE_CUSTOM => 'Choose custom',
+                        'Collection' => 'Choose from collection',
+                        'Custom' => 'Choose custom',
                     ]),
                     Wrapper::create([
                         DropdownField::create('CollectionID', _t(__CLASS__ . '.COLLECTION', 'Collection'), Collection::get()->map()->toArray()),
-                    ])->displayIf('Mode')->isEqualTo(self::MODE_COLLECTION)->end(),
+                    ])->displayIf('Mode')->isEqualTo('Collection')->end(),
                     Wrapper::create([
                         GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(), $gridConfig)->addExtraClass('mt-5'),
-                    ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
+                    ])->displayIf('Mode')->isEqualTo('Custom')->end(),
                 ]
             );
         });
@@ -113,14 +110,10 @@ class ElementListItems extends BaseElement
 
     public function getItems(): ?DataList
     {
-        if ($this->Mode === self::MODE_CUSTOM && $this->ListItems()) {
-            return $this->ListItems()->Sort('ListItemsSort');
-        }
-
-        if ($this->Mode === self::MODE_COLLECTION && $this->Collection()->exists()) {
-            return $this->Collection()->ListItems()->Sort('ListItemsSort');
-        }
-
-        return null;
+        return match($this->Mode) {
+            'collection' => $this->Collection()->ListItems(),
+            'custom' => $this->ListItems()->Sort('ListItemsSort'),
+            default => null,
+        };
     }
 }
