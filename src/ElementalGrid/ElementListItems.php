@@ -42,7 +42,7 @@ class ElementListItems extends BaseElement
     private static string $description = 'Show an overview of list items in a grid element';
 
     /** @config */
-    private static string $icon = 'font-icon-book-open';
+    private static string $icon = 'font-icon-list';
 
     private const MODE_CUSTOM = 'custom';
 
@@ -79,13 +79,6 @@ class ElementListItems extends BaseElement
     {
         $this->beforeUpdateCMSFields(function (FieldList $fields) {
             $gridConfig = new GridFieldConfig_RelationEditor();
-
-            $gridConfig->removeComponentsByType([
-                GridFieldAddNewButton::class,
-                GridFieldArchiveAction::class,
-                GridFieldEditButton::class,
-            ]);
-
             $gridConfig->addComponent(new GridFieldOrderableRows('ListItemsSort'));
 
             $fields->removeByName(
@@ -96,28 +89,22 @@ class ElementListItems extends BaseElement
                 ]
             );
 
-            if ($this->exists()) {
-                $fields->addFieldsToTab(
-                    'Root.Main',
-                    [
-                        HTMLEditorField::create('Content', 'Content'),
-                        DropdownField::create('Mode', 'List items selection mode', [
-                            self::MODE_COLLECTION => 'Choose from collection',
-                            self::MODE_CUSTOM => 'Choose custom',
-                        ]),
-                        Wrapper::create([
-                            DropdownField::create('CollectionID', 'Collection', Collection::get()->map()->toArray()),
-                        ])->displayIf('Mode')->isEqualTo(self::MODE_COLLECTION)->end(),
-                        Wrapper::create([
-                            GridField::create('ListItems', 'List items', $this->ListItems(), $gridConfig)->addExtraClass('mt-5'),
-                        ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
-                    ]
-                );
-            } else {
-                $fields->addFieldsToTab('Root.Main', [
-                    new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.'),
-                ]);
-            }
+            $fields->addFieldsToTab(
+                'Root.Main',
+                [
+                    HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
+                    DropdownField::create('Mode', _t(__CLASS__ . '.SELECTION_MODE', 'List items selection mode'), [
+                        self::MODE_COLLECTION => 'Choose from collection',
+                        self::MODE_CUSTOM => 'Choose custom',
+                    ]),
+                    Wrapper::create([
+                        DropdownField::create('CollectionID', _t(__CLASS__ . '.COLLECTION', 'Collection'), Collection::get()->map()->toArray()),
+                    ])->displayIf('Mode')->isEqualTo(self::MODE_COLLECTION)->end(),
+                    Wrapper::create([
+                        GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(), $gridConfig)->addExtraClass('mt-5'),
+                    ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
+                ]
+            );
         });
 
         return parent::getCMSFields();

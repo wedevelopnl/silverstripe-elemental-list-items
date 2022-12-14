@@ -68,13 +68,8 @@ class Collection extends DataObject
     {
         $fields = parent::getCMSFields();
 
-        $casesGridConfig = new GridFieldConfig_RelationEditor();
-        $casesGridConfig->removeComponentsByType([
-            GridFieldAddNewButton::class,
-            GridFieldArchiveAction::class,
-            GridFieldEditButton::class,
-        ]);
-        $casesGridConfig->addComponent(new GridFieldOrderableRows('ListItemsSort'));
+        $listItemsGridConfig = new GridFieldConfig_RelationEditor();
+        $listItemsGridConfig->addComponent(new GridFieldOrderableRows('ListItemsSort'));
 
         $elementalGridConfig = new GridFieldConfig_RecordViewer();
 
@@ -85,15 +80,15 @@ class Collection extends DataObject
 
         if ($this->exists()) {
             $fields->addFieldsToTab('Root.Main', [
-                GridField::create('ListItems', 'List items', $this->ListItems(), $casesGridConfig),
+                GridField::create('ListItems', _t(__CLASS__ . '.LIST_ITEMS', 'List items'), $this->ListItems(), $listItemsGridConfig),
             ]);
 
-            $fields->addFieldsToTab('Root.Grid elements used on', [
-                GridField::create('ElementListItems', 'Grid elements', $this->ElementListItems(), $elementalGridConfig),
+            $fields->addFieldsToTab('Root.Grid elements used in', [
+                GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'), $this->ElementListItems(), $elementalGridConfig),
             ]);
         } else {
             $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.'),
+                new LiteralField('', _t(__CLASS__ . '.SAVE_FIRST_WARNING', 'Save the collection first, in order to be able to make changes to the contents of this collection.')),
             ]);
         }
 

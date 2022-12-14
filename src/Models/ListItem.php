@@ -22,10 +22,10 @@ class ListItem extends DataObject
     private static string $table_name = 'WeDevelop_ElementalListItems_ListItem';
 
     /** @config */
-    private static string $singular_name = 'Collection';
+    private static string $singular_name = 'List item';
 
     /** @config */
-    private static string $plural_name = 'Collections';
+    private static string $plural_name = 'List items';
 
     /** @config */
     private static string $icon_class = 'font-icon-rocket';
@@ -47,13 +47,6 @@ class ListItem extends DataObject
         'ElementListItems' => ElementListItems::class,
     ];
 
-    /** @config */
-    private static array $many_many_extraFields = [
-        'Collections' => [
-            'CollectionsSort' => 'Int',
-        ],
-    ];
-
     public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
@@ -65,19 +58,13 @@ class ListItem extends DataObject
             'Content',
         ]);
 
-        if ($this->exists()) {
-            $fields->addFieldsToTab('Root.Collections existing in', [
-                GridField::create('Collections', 'Collections', $this->Collections(), new GridFieldConfig_RecordViewer()),
-            ]);
+        $fields->addFieldsToTab('Root.Collections existing in', [
+            GridField::create('Collections', _t(__CLASS__ . '.COLLECTIONS', 'Collections'), $this->Collections(), new GridFieldConfig_RecordViewer()),
+        ]);
 
-            $fields->addFieldsToTab('Root.Grid elements used in', [
-                GridField::create('ElementListItems', 'Grid elements', $this->ElementListItems(), new GridFieldConfig_RecordViewer()),
-            ]);
-        } else {
-            $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.'),
-            ]);
-        }
+        $fields->addFieldsToTab('Root.Grid elements used in', [
+            GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'), $this->ElementListItems(), new GridFieldConfig_RecordViewer()),
+        ]);
 
         return $fields;
     }

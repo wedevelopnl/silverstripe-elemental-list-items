@@ -17,7 +17,7 @@ class ListItemsAdmin extends ModelAdmin
     private static string $menu_title = 'List items';
 
     /** @config */
-    private static string $menu_icon_class = 'font-icon-star-circle';
+    private static string $menu_icon_class = 'font-icon-list';
 
     /** @config */
     private static array $managed_models = [
