@@ -126,7 +126,7 @@ class ElementListItems extends BaseElement
     public function getItems(): ?DataList
     {
         return match($this->Mode) {
-            'collection' => $this->Collection()->ListItems(),
+            'collection' => $this->Collection()->exists() ? $this->Collection()->ListItems() : null,
             'custom' => $this->ListItems()->Sort('ListItemsSort'),
             default => null,
         };
