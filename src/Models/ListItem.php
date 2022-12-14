@@ -46,7 +46,7 @@ class ListItem extends DataObject
 
     /** @config */
     private static array $owns = [
-        'Icon' => Icon::class,
+        'Icon',
     ];
 
     /** @config */
