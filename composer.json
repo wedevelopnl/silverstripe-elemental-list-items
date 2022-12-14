@@ -11,6 +11,7 @@
         "name": "WeDevelop",
         "email": "development@wedevelop.nl"
     }],
+    "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
