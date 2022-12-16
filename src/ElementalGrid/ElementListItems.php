@@ -44,7 +44,7 @@ class ElementListItems extends BaseElement
      * @config
      */
     private static array $db = [
-        'Mode' => 'Enum(["Custom", "Collection"], "Collection")',
+        'Mode' => 'Enum(array("Custom", "Collection"), "Collection")',
     ];
 
     /**
