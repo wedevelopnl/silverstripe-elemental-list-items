@@ -19,7 +19,7 @@
         "silverstripe/cms": "^4@stable",
         "unclecheese/display-logic": "^2.0",
         "symbiote/silverstripe-gridfieldextensions": "^3",
-        "wedevelopnl/silverstripe-icon-manager": "dev-feature/php-7.4-support"
+        "wedevelopnl/silverstripe-icon-manager": "^2.0"
     },
     "require-dev": {
       "friendsofphp/php-cs-fixer": "^3.4"
