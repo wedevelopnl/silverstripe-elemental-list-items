@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
+        "php": ">=7.4",
         "silverstripe/cms": "^4@stable",
         "unclecheese/display-logic": "^2.0",
         "symbiote/silverstripe-gridfieldextensions": "^3.5",
@@ -40,7 +40,8 @@
     },
     "config": {
         "allow-plugins": {
-            "composer/installers": false
+            "composer/installers": false,
+            "silverstripe/vendor-plugin": true
         }
     }
 }
