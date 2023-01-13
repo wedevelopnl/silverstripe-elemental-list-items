@@ -77,30 +77,30 @@ class ListItem extends DataObject
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName([
+                'Collections',
+                'ElementListItems',
+                'Title',
+                'Content',
+                'IconID',
+            ]);
 
-        $fields->removeByName([
-            'Collections',
-            'ElementListItems',
-            'Title',
-            'Content',
-            'IconID',
-        ]);
+            $fields->addFieldsToTab('Root.Main', [
+                IconDropdownField::create('IconID', 'Icon'),
+                TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
+                HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
+            ]);
 
-        $fields->addFieldsToTab('Root.Main', [
-            IconDropdownField::create('IconID', 'Icon'),
-            TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
-            HTMLEditorField::create('Content', _t(__CLASS__ . '.CONTENT', 'Content')),
-        ]);
+            $fields->addFieldsToTab('Root.Collections existing in', [
+                GridField::create('Collections', _t(__CLASS__ . '.COLLECTIONS', 'Collections'), $this->Collections(), new GridFieldConfig_RecordViewer()),
+            ]);
 
-        $fields->addFieldsToTab('Root.Collections existing in', [
-            GridField::create('Collections', _t(__CLASS__ . '.COLLECTIONS', 'Collections'), $this->Collections(), new GridFieldConfig_RecordViewer()),
-        ]);
+            $fields->addFieldsToTab('Root.Grid elements used in', [
+                GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'), $this->ElementListItems(), new GridFieldConfig_RecordViewer()),
+            ]);
+        });
 
-        $fields->addFieldsToTab('Root.Grid elements used in', [
-            GridField::create('ElementListItems', _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'), $this->ElementListItems(), new GridFieldConfig_RecordViewer()),
-        ]);
-
-        return $fields;
+        return parent::getCMSFields();
     }
 }
