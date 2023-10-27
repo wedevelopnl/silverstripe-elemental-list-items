@@ -14,7 +14,7 @@ class ListItemsAdmin extends ModelAdmin
     private static string $url_segment = 'list-items';
 
     /** @config */
-    private static string $menu_title = 'List items';
+    private static string $menu_title = 'Lists';
 
     /** @config */
     private static string $menu_icon_class = 'font-icon-list';
