@@ -15,6 +15,7 @@ use SilverStripe\ORM\HasManyList;
 use SilverStripe\ORM\ManyManyList;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
+use WeDevelop\ElementalListItems\GridField\Actions\CollectionListItemDuplicateAction;
 
 /**
  * @property string $Title
@@ -23,6 +24,8 @@ use WeDevelop\ElementalListItems\ElementalGrid\ElementListItems;
  */
 class Collection extends DataObject
 {
+    public const ENABLE_DUPLICATION_KEY = 'enable_duplication';
+    public const ENABLE_LISTITEM_DUPLICATION_KEY = 'enable_listitem_duplication';
     /** @config */
     private static string $table_name = 'WeDevelop_ElementalListItems_Collection';
 
@@ -79,48 +82,54 @@ class Collection extends DataObject
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $listItemsGridConfig = new GridFieldConfig_RelationEditor();
+            $listItemsGridConfig->addComponent(new GridFieldOrderableRows('ListItemsSort'));
 
-        $listItemsGridConfig = new GridFieldConfig_RelationEditor();
-        $listItemsGridConfig->addComponent(new GridFieldOrderableRows('ListItemsSort'));
+            if (self::config()->get(self::ENABLE_LISTITEM_DUPLICATION_KEY)) {
+                $listItemsGridConfig->addComponent(new CollectionListItemDuplicateAction([
+                    CollectionListItemDuplicateAction::COLLECTION_ID_KEY => $this->ID,
+                ]));
+            }
 
-        $elementalGridConfig = new GridFieldConfig_RecordViewer();
+            $elementalGridConfig = new GridFieldConfig_RecordViewer();
 
-        $fields->removeByName([
-            'ListItems',
-            'ElementListItems',
-        ]);
-
-        if ($this->exists()) {
-            $fields->addFieldsToTab('Root.Main', [
-                TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
-                GridField::create(
-                    'ListItems',
-                    _t(__CLASS__ . '.LIST_ITEMS', 'List items'),
-                    $this->ListItems(),
-                    $listItemsGridConfig
-                ),
+            $fields->removeByName([
+                'ListItems',
+                'ElementListItems',
             ]);
 
-            $fields->addFieldsToTab('Root.Grid elements used in', [
-                GridField::create(
-                    'ElementListItems',
-                    _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'),
-                    $this->ElementListItems()->filter([
-                        'Mode' => 'Collection',
-                    ]),
-                    $elementalGridConfig
-                ),
-            ]);
-        } else {
-            $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', _t(
-                    __CLASS__ . '.SAVE_FIRST_WARNING',
-                    'Save the collection first, in order to be able to make changes to the contents of this collection.'
-                )),
-            ]);
-        }
+            if ($this->exists()) {
+                $fields->addFieldsToTab('Root.Main', [
+                    TextField::create('Title', _t(__CLASS__ . '.TITLE', 'Title')),
+                    GridField::create(
+                        'ListItems',
+                        _t(__CLASS__ . '.LIST_ITEMS', 'List items'),
+                        $this->ListItems(),
+                        $listItemsGridConfig
+                    ),
+                ]);
 
-        return $fields;
+                $fields->addFieldsToTab('Root.Grid elements used in', [
+                    GridField::create(
+                        'ElementListItems',
+                        _t(__CLASS__ . '.GRID_ELEMENTS', 'Grid elements'),
+                        $this->ElementListItems()->filter([
+                            'Mode' => 'Collection',
+                        ]),
+                        $elementalGridConfig
+                    ),
+                ]);
+            } else {
+                $fields->addFieldsToTab('Root.Main', [
+                    new LiteralField('', _t(
+                        __CLASS__ . '.SAVE_FIRST_WARNING',
+                        'Save the collection first, in order to be able to make changes to the contents of this collection.'
+                    )),
+                ]);
+            }
+        });
+
+        return parent::getCMSFields();
     }
 }

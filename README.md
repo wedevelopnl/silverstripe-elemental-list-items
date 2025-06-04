@@ -32,3 +32,37 @@ You can SSH into the container using `make sh`.
 
 #### All make commands
 You can run `make help` to get a list with all available `make` commands.
+
+
+## Configuration
+
+### Duplication behaviour
+
+```yml
+---
+Name: elemental-list-items
+---
+WeDevelop\ElementalListItems\Models\Collection:
+  enable_duplication: false
+  enable_listitem_duplication: false
+
+WeDevelop\ElementalListItems\Models\ListItem:
+  enable_duplication: false
+```
+
+These opt-in configuration options enable the following duplication behavior along with a duplication button in the GridField:
+
+#### Collection.enable_duplication (Collections Overview):
+
+1. Duplicate Collection with no relations
+2. Duplicate all linked List Items with no relations
+3. Link duplicated ListItems to duplicated Collection
+
+#### Collection.enable_listitem_duplication (Collection Detail View):
+
+1. Duplicate a ListItem with no relations
+2. Link ListItem to current Collection
+
+#### ListItem.enable_duplication (ListItems Overview):
+
+1. Duplicate ListItem with no relations

@@ -21,6 +21,7 @@ use WeDevelop\IconManager\Models\Icon;
  */
 class ListItem extends DataObject
 {
+    public const ENABLE_DUPLICATION_KEY = 'enable_duplication';
     /** @config */
     private static string $table_name = 'WeDevelop_ElementalListItems_ListItem';
 

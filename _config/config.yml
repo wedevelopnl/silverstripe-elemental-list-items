@@ -1,3 +1,9 @@
 ---
 Name: elemental-list-items
 ---
+WeDevelop\ElementalListItems\Models\Collection:
+  enable_duplication: false
+  enable_listitem_duplication: false
+
+WeDevelop\ElementalListItems\Models\ListItem:
+  enable_duplication: false
