@@ -38,24 +38,4 @@ class CollectionListItemDuplicateAction extends AbstractDuplicateAction
             );
         }
     }
-
-    public function getColumnContent($gridField, $record, $columnName)
-    {
-        if (!$record->canEdit()) {
-            return;
-        }
-
-        $field = GridField_FormAction::create(
-            $gridField,
-            'DuplicateAction' . $record->ID,
-            false,
-            "duplicateobject",
-            ['RecordID' => $record->ID]
-        )
-            ->addExtraClass('gridfield-button-duplicate btn--icon-md font-icon-page-multiple btn--no-text grid-field__icon-action')
-            ->setAttribute('title', 'Duplicate ' . $record->singular_name())
-            ->setDescription('Duplicate ' . $record->singular_name());
-
-        return $field->Field();
-    }
 }
