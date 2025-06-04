@@ -10,12 +10,6 @@ use WeDevelop\ElementalListItems\Models\ListItem;
 
 class CollectionDuplicateAction extends AbstractDuplicateAction
 {
-//    On Duplicate Collection:
-//
-//    - Create new Collection
-//    - Duplicate List Items
-//    - Unlink all relations on ListItem
-//    - Link to new Duplicate
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == 'duplicateobject') {

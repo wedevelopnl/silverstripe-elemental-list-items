@@ -8,10 +8,6 @@ use SilverStripe\ORM\DataList;
 
 class BlankListItemDuplicateAction extends AbstractDuplicateAction
 {
-//    On Duplicate ListItem (Item View):
-//
-//    - Create new ListItem
-//    - Unlink all Relations on ListItem
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == 'duplicateobject') {

@@ -12,11 +12,6 @@ class CollectionListItemDuplicateAction extends AbstractDuplicateAction
 {
     public const COLLECTION_ID_KEY = 'CollectionID';
 
-//    On Duplicate ListItem (Collection View):
-//
-//    - Create new ListItem
-//    - Unlink all Relations on ListItem
-//    - Link to current Collection
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == 'duplicateobject') {
